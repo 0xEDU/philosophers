@@ -20,13 +20,11 @@ $(PATH_OBJS)%.o: $(PATH_SRCS)%.c
 	@echo "\033[1;92m[SUCCESS] Object creation done!\033[0m"
 
 clean:
-	@make clean --no-print-directory -C ./libft/
-	@rm -rf $(PATH_OBJ)
+	@rm -rf $(PATH_OBJS)
 	@echo "\33[1;93m[SUCCESS] Objects removed!\33[0m"
 
 fclean: clean
 	@rm -f $(NAME)
-	@make fclean --no-print-directory -C ./libft/
 	@echo "\033[1;93m[SUCCESS] Full clean done!\33[0m"
 
 re: fclean all
