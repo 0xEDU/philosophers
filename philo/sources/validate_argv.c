@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   validate_argv.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
+/*   By: etachott <etachott@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/15 23:02:34 by edu               #+#    #+#             */
-/*   Updated: 2023/02/16 20:23:43 by etachott         ###   ########.fr       */
+/*   Created: 2023/02/16 20:11:30 by etachott          #+#    #+#             */
+/*   Updated: 2023/02/16 20:11:47 by etachott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# include <stdio.h>
-# include <pthread.h>
+#include "../includes/philo.h"
 
-int	validate_argv(int argc, char *argv[]);
-#endif
+int	validate_argv(int argc, char *argv[])
+{
+	(void) argv;
+	if (argc < 4 || argc > 5)
+		return (0);
+	return (1);
+}

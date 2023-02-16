@@ -2,17 +2,19 @@ NAME = philo
 PATH_SRCS = ./sources/
 PATH_OBJS = ./objects/
 
-SRCS = main.c
+SRCS = main.c \
+	   validate_argv.c
 
 OBJS = ${SRCS:%.c=$(PATH_OBJS)%.o}
 
 INCLUDE = -I ./includes/
 FLAGS = -Wall -Wextra -Werror -g3
+LINKERS = -pthread
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@cc $(FLAGS) $(OBJS) -o $(NAME)
+	@cc $(FLAGS) $(OBJS) $(LINKERS) -o $(NAME)
 
 $(PATH_OBJS)%.o: $(PATH_SRCS)%.c
 	@mkdir -p $(PATH_OBJS)
