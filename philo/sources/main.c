@@ -6,11 +6,11 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 23:02:09 by edu               #+#    #+#             */
-/*   Updated: 2023/02/17 21:37:43 by edu              ###   ########.fr       */
+/*   Updated: 2023/02/17 21:46:17 by edu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "philo.h"
 
 void	eat(int *philo_id)
 {
@@ -40,22 +40,12 @@ void	*simulation(void *arg)
 
 int	main(int argc, char *argv[])
 {
-	pthread_t	thread;
 	t_args		*args;
-	int			*index;
 
-	index = malloc(sizeof(int) * 1);
-	*index = 1;
 	if (!validate_argv(argc, argv))
 		return (1);
 	args = init_args(argv);
-	while (*index <= args->p_quantity)
-	{
-		pthread_create(&thread, NULL, simulation, (void *)index);
-		pthread_join(thread, NULL);
-		(*index)++;
-	}
-	free(index);
+	loop_simulation(args);
 	free(args);
 	return (0);
 }

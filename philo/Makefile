@@ -5,7 +5,8 @@ PATH_OBJS = ./objects/
 
 SRCS = main.c \
 	   init_args.c \
-	   validate_argv.c
+	   loop_simulation.c \
+	   validate_argv.c 
 
 UTILS = ft_atoi.c \
 		ft_calloc.c \
