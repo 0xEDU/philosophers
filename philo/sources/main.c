@@ -6,7 +6,7 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 23:02:09 by edu               #+#    #+#             */
-/*   Updated: 2023/02/17 21:46:17 by edu              ###   ########.fr       */
+/*   Updated: 2023/02/18 00:08:38 by edu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,40 @@ void	*simulation(void *arg)
 	return (NULL);
 }
 
+long int	get_time_elapsed(t_time *tv_start, t_time *tv_end)
+{
+	long int		elapsed_sec;
+	long int		elapsed_usec;
+
+	elapsed_sec = tv_end->tv_sec - tv_start->tv_sec;
+	elapsed_usec = tv_end->tv_usec - tv_start->tv_usec;
+	if (elapsed_usec < 0)
+	{
+		elapsed_sec--;
+		elapsed_usec += 1000000;
+	}
+	return (((elapsed_sec * 1000) + elapsed_usec) / 1000);
+}
+
+long int	get_time(void)
+{
+	t_time			t;
+
+	gettimeofday(&t, NULL);
+	return (t.tv_sec * 1000000 + t.tv_usec);
+}
+
 int	main(int argc, char *argv[])
 {
-	t_args		*args;
+	t_args			*args;
+	long int		p;
 
+	p = get_time();
 	if (!validate_argv(argc, argv))
 		return (1);
 	args = init_args(argv);
 	loop_simulation(args);
 	free(args);
+	printf("%ld\n", get_time() - p);
 	return (0);
 }
