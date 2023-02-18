@@ -6,7 +6,7 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 23:02:09 by edu               #+#    #+#             */
-/*   Updated: 2023/02/18 14:13:42 by edu              ###   ########.fr       */
+/*   Updated: 2023/02/18 14:28:43 by edu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,21 @@
 void	eat(int *philo_id, long int start)
 {
 	usleep(10);
-	printf("%ld Philosopher %d is eating.\n",
+	printf("%ld Philosopher %d is eating. 😋\n",
 		get_elapsed_time(start), *philo_id);
 }
 
 void	rest(int *philo_id, long int start)
 {
 	usleep(200 * 1000);
-	printf("%ld Philosopher %d is sleeping.\n",
+	printf("%ld Philosopher %d is sleeping. 😴\n",
 		get_elapsed_time(start), *philo_id);
 }
 
 void	think(int *philo_id, long int start)
 {
 	usleep(300 * 1000);
-	printf("%ld Philosopher %d is thinking.\n",
+	printf("%ld Philosopher %d is thinking. 🤔\n",
 		get_elapsed_time(start), *philo_id);
 }
 
