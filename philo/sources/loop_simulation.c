@@ -6,22 +6,23 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 21:34:06 by edu               #+#    #+#             */
-/*   Updated: 2023/02/18 14:13:21 by edu              ###   ########.fr       */
+/*   Updated: 2023/02/18 14:45:46 by edu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	loop_simulation(t_args *args)
+void	loop_simulation(t_philo *philo)
 {
 	pthread_t	thread;
 	int			*index;
 
 	index = ft_calloc(sizeof(int), 1);
 	*index = 1;
-	while (*index <= args->p_quantity)
+	while (*index <= philo->args->p_quantity)
 	{
-		pthread_create(&thread, NULL, simulation, (void *)index);
+		philo->id = *index;
+		pthread_create(&thread, NULL, simulation, (void *)philo);
 		pthread_join(thread, NULL);
 		(*index)++;
 	}

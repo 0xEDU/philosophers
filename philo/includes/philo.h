@@ -6,7 +6,7 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 23:02:34 by edu               #+#    #+#             */
-/*   Updated: 2023/02/18 13:46:01 by edu              ###   ########.fr       */
+/*   Updated: 2023/02/18 14:45:06 by edu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ typedef struct s_args {
 	int	p_eat_time;
 }				t_args;
 
+typedef struct s_philo {
+	t_args	*args;
+	int		id;
+}				t_philo;
+
 typedef struct timeval	t_timeval;
 
 /* Structural functions */
@@ -36,7 +41,7 @@ time_t		get_current_time(void);
 time_t		get_elapsed_time(long int start);
 
 /* Simulation functions */
-void		loop_simulation(t_args *args);
+void		loop_simulation(t_philo *philo);
 void		*simulation(void *arg);
 
 /* Utils functions */
