@@ -6,7 +6,7 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 23:02:09 by edu               #+#    #+#             */
-/*   Updated: 2023/02/18 15:03:02 by edu              ###   ########.fr       */
+/*   Updated: 2023/02/18 15:30:02 by edu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 void	eat(t_philo *philo)
 {
-	usleep(10);
+	usleep(philo->args->p_eat * 1000);
 	printf("%ld Philosopher %d is eating. 😋\n",
 		get_elapsed_time(philo->time_start), philo->id);
 }
 
 void	rest(t_philo *philo)
 {
-	usleep(200 * 1000);
+	usleep(philo->args->p_sleep * 1000);
 	printf("%ld Philosopher %d is sleeping. 😴\n",
 		get_elapsed_time(philo->time_start), philo->id);
 }
 
 void	think(t_philo *philo)
 {
-	usleep(300 * 1000);
+	usleep((philo->args->p_sleep - philo->args->p_eat) * 1000);
 	printf("%ld Philosopher %d is thinking. 🤔\n",
 		get_elapsed_time(philo->time_start), philo->id);
 }

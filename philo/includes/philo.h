@@ -6,7 +6,7 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 23:02:34 by edu               #+#    #+#             */
-/*   Updated: 2023/02/18 14:58:12 by edu              ###   ########.fr       */
+/*   Updated: 2023/02/18 15:16:49 by edu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct s_args {
 	int	p_die;
 	int	p_eat;
 	int	p_sleep;
-	int	p_eat_time;
+	int	p_eat_quantity;
 }				t_args;
 
 typedef struct s_philo {

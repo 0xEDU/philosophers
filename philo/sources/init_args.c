@@ -6,7 +6,7 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 18:13:46 by edu               #+#    #+#             */
-/*   Updated: 2023/02/17 18:42:04 by edu              ###   ########.fr       */
+/*   Updated: 2023/02/18 15:16:34 by edu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ t_args	*init_args(char *argv[])
 	new->p_eat = ft_atoi(argv[3]);
 	new->p_sleep = ft_atoi(argv[4]);
 	if (argv[5])
-		new->p_eat_time = ft_atoi(argv[5]);
+		new->p_eat_quantity = ft_atoi(argv[5]);
 	return (new);
 }
