@@ -6,7 +6,7 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 23:02:34 by edu               #+#    #+#             */
-/*   Updated: 2023/02/17 23:55:59 by edu              ###   ########.fr       */
+/*   Updated: 2023/02/18 13:46:01 by edu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <pthread.h>
 # include <stdlib.h>
 # include <sys/time.h>
+# include <unistd.h>
 
 typedef struct s_args {
 	int	p_quantity;
@@ -24,16 +25,19 @@ typedef struct s_args {
 	int	p_eat_time;
 }				t_args;
 
-typedef struct timeval	t_time;
+typedef struct timeval	t_timeval;
 
 /* Structural functions */
 t_args		*init_args(char *argv[]);
 int			validate_argv(int argc, char *argv[]);
 
+/* Time-related functions */
+time_t		get_current_time(void);
+time_t		get_elapsed_time(long int start);
+
 /* Simulation functions */
 void		loop_simulation(t_args *args);
 void		*simulation(void *arg);
-long int	get_time_elapsed(t_time *tv_start, t_time *tv_end);
 
 /* Utils functions */
 long int	ft_atoi(const char *str);

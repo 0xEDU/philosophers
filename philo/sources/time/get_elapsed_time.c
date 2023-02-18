@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   loop_simulation.c                                  :+:      :+:    :+:   */
+/*   get_elapsed_time.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/17 21:34:06 by edu               #+#    #+#             */
-/*   Updated: 2023/02/18 14:13:21 by edu              ###   ########.fr       */
+/*   Created: 2023/02/18 12:25:01 by edu               #+#    #+#             */
+/*   Updated: 2023/02/18 13:59:25 by edu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	loop_simulation(t_args *args)
+time_t	get_elapsed_time(long int start)
 {
-	pthread_t	thread;
-	int			*index;
-
-	index = ft_calloc(sizeof(int), 1);
-	*index = 1;
-	while (*index <= args->p_quantity)
-	{
-		pthread_create(&thread, NULL, simulation, (void *)index);
-		pthread_join(thread, NULL);
-		(*index)++;
-	}
-	free(index);
+	return (get_current_time() - start);
 }
