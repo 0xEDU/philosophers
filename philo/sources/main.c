@@ -6,33 +6,35 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 23:02:09 by edu               #+#    #+#             */
-/*   Updated: 2023/02/17 18:44:00 by edu              ###   ########.fr       */
+/*   Updated: 2023/02/17 21:37:43 by edu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void	eat(void)
+void	eat(int *philo_id)
 {
-	printf("Philosopher is eating.\n");
+	printf("Philosopher %d is eating.\n", *philo_id);
 }
 
-void	sleep(void)
+void	sleep(int *philo_id)
 {
-	printf("Philosopher is sleeping.\n");
+	printf("Philosopher %d is sleeping.\n", *philo_id);
 }
 
-void	think(void)
+void	think(int *philo_id)
 {
-	printf("Philosopher is thinking.\n");
+	printf("Philosopher %d is thinking.\n", *philo_id);
 }
 
 void	*simulation(void *arg)
 {
-	(void)arg;
-	eat();
-	sleep();
-	think();
+	int	*philo_id;
+
+	philo_id = (int *)arg;
+	eat(philo_id);
+	sleep(philo_id);
+	think(philo_id);
 	return (NULL);
 }
 
@@ -40,12 +42,20 @@ int	main(int argc, char *argv[])
 {
 	pthread_t	thread;
 	t_args		*args;
+	int			*index;
 
+	index = malloc(sizeof(int) * 1);
+	*index = 1;
 	if (!validate_argv(argc, argv))
 		return (1);
 	args = init_args(argv);
-	printf("%p\n", &args);
-	pthread_create(&thread, NULL, simulation, NULL);
-	pthread_join(thread, NULL);
+	while (*index <= args->p_quantity)
+	{
+		pthread_create(&thread, NULL, simulation, (void *)index);
+		pthread_join(thread, NULL);
+		(*index)++;
+	}
+	free(index);
+	free(args);
 	return (0);
 }
