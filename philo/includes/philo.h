@@ -6,7 +6,7 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 23:02:34 by edu               #+#    #+#             */
-/*   Updated: 2023/02/18 14:45:06 by edu              ###   ########.fr       */
+/*   Updated: 2023/02/18 14:58:12 by edu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_args {
 
 typedef struct s_philo {
 	t_args	*args;
+	time_t	time_start;
 	int		id;
 }				t_philo;
 
