@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_args.c                                        :+:      :+:    :+:   */
+/*   free_table.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/17 18:13:46 by edu               #+#    #+#             */
-/*   Updated: 2023/02/18 15:16:34 by edu              ###   ########.fr       */
+/*   Created: 2023/02/19 11:58:31 by edu               #+#    #+#             */
+/*   Updated: 2023/02/19 12:05:16 by edu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "philo.h"
 
-t_args	*init_args(char *argv[])
+static void	free_forks(t_fork_pair *forks, int quantity)
 {
-	t_args	*new;
+	int	index;
 
-	new = ft_calloc(sizeof(t_args), 1);
-	new->p_quantity = ft_atoi(argv[1]);
-	new->p_die = ft_atoi(argv[2]);
-	new->p_eat = ft_atoi(argv[3]);
-	new->p_sleep = ft_atoi(argv[4]);
-	if (argv[5])
-		new->p_eat_quantity = ft_atoi(argv[5]);
-	return (new);
+	index = 0;
+	while (index < quantity)
+	{
+		pthread_mutex_destroy(&forks[index].left_fork);
+		pthread_mutex_destroy(&forks[index].right_fork);
+		index++;
+	}
+	free(forks);
+}
+
+void	free_table(t_table *table)
+{
+	free_forks(table->forks, table->args->p_quantity);
+	free(table->args);
+	free(table->philos);
+	free(table);
 }

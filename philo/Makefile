@@ -5,7 +5,8 @@ PATH_UTILS = ./sources/utils/
 PATH_OBJS = ./objects/
 
 SRCS = main.c \
-	   init_args.c \
+	   free_table.c \
+	   init_table.c \
 	   loop_simulation.c \
 	   validate_argv.c 
 
