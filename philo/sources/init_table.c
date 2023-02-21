@@ -6,7 +6,7 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 18:13:46 by edu               #+#    #+#             */
-/*   Updated: 2023/02/19 11:56:57 by edu              ###   ########.fr       */
+/*   Updated: 2023/02/21 19:24:04 by edu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,33 +26,36 @@ static t_args	*init_args(char *argv[])
 	return (args);
 }
 
-static t_fork_pair	*init_forks(int quantity)
+static t_fork	*init_forks(int quantity)
 {
-	t_fork_pair	*forks;
-	int			index;
+	t_fork	*forks;
+	int		index;
 
 	index = 0;
-	forks = ft_calloc(sizeof(t_fork_pair), quantity);
+	forks = ft_calloc(sizeof(t_fork), quantity);
 	while (index < quantity)
 	{
-		pthread_mutex_init(&forks[index].left_fork, NULL);
-		pthread_mutex_init(&forks[index].right_fork, NULL);
+		pthread_mutex_init(&forks[index], NULL);
 		index++;
 	}
 	return (forks);
 }
 
-static t_philo	*init_philos(t_fork_pair *forks, int quantity)
+static t_philo	*init_philos(t_fork *forks, char *argv[])
 {
 	t_philo	*philos;
 	int		index;
+	int		quantity;
 
 	index = 0;
+	quantity = ft_atoi(argv[1]);
 	philos = ft_calloc(sizeof(t_philo), quantity);
 	while (index < quantity)
 	{
+		philos[index].args = init_args(argv);
 		philos[index].id = index + 1;
-		philos[index].forks = &forks[index];
+		philos[index].left_fork = &forks[index];
+		philos[index].right_fork = &forks[(index + 1) % quantity];
 		index++;
 	}
 	return (philos);
@@ -63,8 +66,7 @@ t_table	*init_table(char *argv[])
 	t_table	*table;
 
 	table = ft_calloc(sizeof(t_table), 1);
-	table->args = init_args(argv);
-	table->forks = init_forks(table->args->p_quantity);
-	table->philos = init_philos(table->forks, table->args->p_quantity);
+	table->forks = init_forks(ft_atoi(argv[1]));
+	table->philos = init_philos(table->forks, argv);
 	return (table);
 }

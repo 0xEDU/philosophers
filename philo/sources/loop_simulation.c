@@ -6,7 +6,7 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 21:34:06 by edu               #+#    #+#             */
-/*   Updated: 2023/02/19 11:57:43 by edu              ###   ########.fr       */
+/*   Updated: 2023/02/21 19:24:40 by edu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,21 @@
 
 void	loop_simulation(t_table *table)
 {
-	pthread_t	thread;
-	int			*index;
+	pthread_t	*threads;
+	int			index;
 
-	index = ft_calloc(sizeof(int), 1);
-	*index = 1;
-while (*index <= table->args->p_quantity)
+	threads = ft_calloc(sizeof(pthread_t), table->philos->args->p_quantity);
+	index = 0;
+	while (index < table->philos[0].args->p_quantity)
 	{
-		pthread_create(&thread, NULL, simulation, (void *)table);
-		pthread_join(thread, NULL);
-		(*index)++;
+		pthread_create(&threads[index], NULL, simulation, &table->philos[index]);
+		index++;
 	}
-	free(index);
+	index = 0;
+	while (index < table->philos->args->p_quantity)
+	{
+		pthread_join(threads[index], NULL);
+		index++;
+	}
+	free(threads);
 }

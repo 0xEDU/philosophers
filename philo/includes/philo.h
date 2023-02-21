@@ -6,7 +6,7 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 23:02:34 by edu               #+#    #+#             */
-/*   Updated: 2023/02/19 12:02:39 by edu              ###   ########.fr       */
+/*   Updated: 2023/02/21 19:14:44 by edu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,19 @@ typedef struct s_args {
 	int	p_eat_quantity;
 }				t_args;
 
-typedef struct s_fork_pair {
-	pthread_mutex_t	left_fork;
-	pthread_mutex_t	right_fork;
-}				t_fork_pair;
+typedef pthread_mutex_t	t_fork;
 
 typedef struct s_philo {
-	t_fork_pair	*forks;
-	int			id;
+	t_fork	*left_fork;
+	t_fork	*right_fork;
+	t_args	*args;
+	int		id;
 }				t_philo;
 
 typedef struct s_table {
-	time_t		sim_start;
-	t_args		*args;
-	t_philo		*philos;
-	t_fork_pair	*forks;
+	int		current_philo;
+	t_philo	*philos;
+	t_fork	*forks;
 }				t_table;
 
 typedef struct timeval	t_timeval;

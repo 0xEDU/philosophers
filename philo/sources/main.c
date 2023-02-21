@@ -6,38 +6,60 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 23:02:09 by edu               #+#    #+#             */
-/*   Updated: 2023/02/19 12:02:20 by edu              ###   ########.fr       */
+/*   Updated: 2023/02/21 19:33:22 by edu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	eat(t_table *table)
+void	eat(t_philo *philo, time_t sim_start)
 {
+	t_fork	*first;
+	t_fork	*last;
+
+	if (philo->id % 2 == 0)
+	{
+		first = philo->left_fork;
+		last = philo->right_fork;
+	}
+	else
+	{
+		first = philo->right_fork;
+		last = philo->left_fork;
+	}
+	pthread_mutex_lock(first);
+	printf("%ld Philosopher %d has taken a fork.\n",
+		get_elapsed_time(sim_start), philo->id);
+	pthread_mutex_lock(last);
+	printf("%ld Philosopher %d has taken a fork.\n",
+		get_elapsed_time(sim_start), philo->id);
 	printf("%ld Philosopher %d is eating. 😋\n",
-		get_elapsed_time(table->sim_start), table->philos->id);
-	usleep(table->args->p_eat * 1000);
+		get_elapsed_time(sim_start), philo->id);
+	pthread_mutex_unlock(philo->right_fork);
+	pthread_mutex_unlock(philo->left_fork);
+	usleep(philo->args->p_eat * 1000);
 }
 
-void	rest(t_table *table)
+void	rest(t_philo *philo, time_t sim_start)
 {
 	printf("%ld Philosopher %d is sleeping. 😴\n",
-		get_elapsed_time(table->sim_start), table->philos->id);
-	usleep(table->args->p_sleep * 1000);
+		get_elapsed_time(sim_start), philo->id);
+	usleep(philo->args->p_sleep * 1000);
 }
 
-void	think(t_table *table)
+void	think(t_philo *philo, time_t sim_start)
 {
 	printf("%ld Philosopher %d is thinking. 🤔\n",
-		get_elapsed_time(table->sim_start), table->philos->id);
+		get_elapsed_time(sim_start), philo->id);
 }
 
-void	*simulation(void *table)
+void	*simulation(void *philo)
 {
-	((t_table *) table)->sim_start = get_current_time();
-	eat(table);
-	rest(table);
-	think(table);
+	const time_t sim_start = get_current_time();
+
+	eat((t_philo *)philo, sim_start);
+	rest((t_philo *)philo, sim_start);
+	think((t_philo *)philo, sim_start);
 	return (NULL);
 }
 
