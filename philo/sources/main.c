@@ -6,7 +6,7 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 23:02:09 by edu               #+#    #+#             */
-/*   Updated: 2023/02/22 16:24:37 by etachott         ###   ########.fr       */
+/*   Updated: 2023/02/22 17:23:26 by etachott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,10 @@ void	think(t_philo *philo, time_t sim_start)
 
 void	*simulation(void *ptr)
 {
-	const time_t sim_start = get_current_time();
-	t_philo	*philo = ptr;
+	const time_t	sim_start = get_current_time();
+	t_philo			*philo;
 
+	philo = ptr;
 	if (philo-> id % 2 == 0)
 		usleep(300 * 1000);
 	eat(philo, sim_start);
