@@ -6,7 +6,7 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 23:02:34 by edu               #+#    #+#             */
-/*   Updated: 2023/02/21 23:29:48 by edu              ###   ########.fr       */
+/*   Updated: 2023/02/22 17:59:26 by etachott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_args {
 	int		p_sleep;
 	int		p_eat_quantity;
 	t_fork	state_lock;
+	t_fork	meals_lock;
 }				t_args;
 
 typedef struct s_philo {
@@ -39,6 +40,7 @@ typedef struct s_philo {
 	t_fork	*right_fork;
 	t_args	*args;
 	int		id;
+	int		meals_done;
 }				t_philo;
 
 typedef struct s_table {
@@ -67,4 +69,5 @@ long int	ft_atoi(const char *str);
 void		*ft_calloc(size_t count, size_t size);
 int			ft_isdigit(int c);
 void		print_state(t_philo *philo, char *state, time_t start_time);
+void		increase_meals_done(t_philo *philo);
 #endif

@@ -16,6 +16,7 @@ TIME_SRCS = get_current_time.c \
 UTILS = ft_atoi.c \
 		ft_calloc.c \
 		ft_isdigit.c \
+		increase_meals_done.c \
 		print_state.c
 
 OBJS = ${SRCS:%.c=$(PATH_OBJS)%.o}
