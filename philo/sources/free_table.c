@@ -6,7 +6,7 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:58:31 by edu               #+#    #+#             */
-/*   Updated: 2023/02/21 19:17:12 by edu              ###   ########.fr       */
+/*   Updated: 2023/02/21 23:34:35 by edu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,16 @@ static void	free_forks(t_fork *forks, int quantity)
 	free(forks);
 }
 
-static void	free_args(t_philo *philo)
+static void	free_locks(t_args *args)
 {
-	const int	quantity = philo->args->p_quantity;
-	int			index;
-
-	index = 0;
-	while (index < quantity)
-	{
-		free(philo[index].args);
-		index++;
-	}
+	pthread_mutex_destroy(&args->state_lock);
 }
 
 void	free_table(t_table *table)
 {
 	free_forks(table->forks, table->philos->args->p_quantity);
-	free_args(table->philos);
+	free_locks(table->philos->args);
+	free(table->philos->args);
 	free(table->philos);
 	free(table);
 }

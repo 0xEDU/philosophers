@@ -6,7 +6,7 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 23:02:34 by edu               #+#    #+#             */
-/*   Updated: 2023/02/21 19:14:44 by edu              ###   ########.fr       */
+/*   Updated: 2023/02/21 23:29:48 by edu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,22 @@
 # include <sys/time.h>
 # include <unistd.h>
 
-typedef struct s_args {
-	int	p_quantity;
-	int	p_die;
-	int	p_eat;
-	int	p_sleep;
-	int	p_eat_quantity;
-}				t_args;
+# define TAKE_FORK "has taken a fork."
+# define EAT "is eating."
+# define SLEEP "is sleeping."
+# define THINK "is thinking."
+# define DIE "died."
 
 typedef pthread_mutex_t	t_fork;
+
+typedef struct s_args {
+	int		p_quantity;
+	int		p_die;
+	int		p_eat;
+	int		p_sleep;
+	int		p_eat_quantity;
+	t_fork	state_lock;
+}				t_args;
 
 typedef struct s_philo {
 	t_fork	*left_fork;
@@ -59,4 +66,5 @@ void		*simulation(void *arg);
 long int	ft_atoi(const char *str);
 void		*ft_calloc(size_t count, size_t size);
 int			ft_isdigit(int c);
+void		print_state(t_philo *philo, char *state, time_t start_time);
 #endif

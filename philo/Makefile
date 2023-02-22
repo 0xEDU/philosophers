@@ -15,7 +15,8 @@ TIME_SRCS = get_current_time.c \
 
 UTILS = ft_atoi.c \
 		ft_calloc.c \
-		ft_isdigit.c
+		ft_isdigit.c \
+		print_state.c
 
 OBJS = ${SRCS:%.c=$(PATH_OBJS)%.o}
 UTILS_OBJS = ${UTILS:%.c=$(PATH_OBJS)%.o}

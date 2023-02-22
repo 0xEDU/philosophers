@@ -6,7 +6,7 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 18:13:46 by edu               #+#    #+#             */
-/*   Updated: 2023/02/21 19:24:04 by edu              ###   ########.fr       */
+/*   Updated: 2023/02/21 23:27:46 by edu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static t_args	*init_args(char *argv[])
 	args->p_die = ft_atoi(argv[2]);
 	args->p_eat = ft_atoi(argv[3]);
 	args->p_sleep = ft_atoi(argv[4]);
+	pthread_mutex_init(&args->state_lock, NULL);
 	if (argv[5])
 		args->p_eat_quantity = ft_atoi(argv[5]);
 	return (args);
@@ -44,15 +45,17 @@ static t_fork	*init_forks(int quantity)
 static t_philo	*init_philos(t_fork *forks, char *argv[])
 {
 	t_philo	*philos;
+	t_args	*args;
 	int		index;
 	int		quantity;
 
 	index = 0;
 	quantity = ft_atoi(argv[1]);
+	args = init_args(argv);
 	philos = ft_calloc(sizeof(t_philo), quantity);
 	while (index < quantity)
 	{
-		philos[index].args = init_args(argv);
+		philos[index].args = args;
 		philos[index].id = index + 1;
 		philos[index].left_fork = &forks[index];
 		philos[index].right_fork = &forks[(index + 1) % quantity];
