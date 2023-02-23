@@ -6,7 +6,7 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 23:02:09 by edu               #+#    #+#             */
-/*   Updated: 2023/02/22 18:02:05 by etachott         ###   ########.fr       */
+/*   Updated: 2023/02/23 19:33:48 by etachott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <pthread.h>
 #include <unistd.h>
 
-void	eat(t_philo *philo, time_t sim_start)
+int	eat(t_philo *philo, time_t sim_start)
 {
 	if (philo->id % 2)
 	{
@@ -33,19 +33,24 @@ void	eat(t_philo *philo, time_t sim_start)
 		increase_meals_done(philo);
 	pthread_mutex_unlock(philo->right_fork);
 	pthread_mutex_unlock(philo->left_fork);
+	if (philo->meals_done == philo->args->p_eat_quantity)
+		return (0);
 	usleep(philo->args->p_eat * 1000);
+	return (1);
 }
 
-void	rest(t_philo *philo, time_t sim_start)
+int	rest(t_philo *philo, time_t sim_start)
 {
 	print_state(philo, SLEEP, sim_start);
 	usleep(philo->args->p_sleep * 1000);
+	return (1);
 }
 
-void	think(t_philo *philo, time_t sim_start)
+int	think(t_philo *philo, time_t sim_start)
 {
 	print_state(philo, THINK, sim_start);
 	usleep(500);
+	return (1);
 }
 
 void	*simulation(void *ptr)
@@ -54,14 +59,12 @@ void	*simulation(void *ptr)
 	t_philo			*philo;
 
 	philo = ptr;
-	while (philo->meals_done < philo->args->p_eat_quantity)
-	{
-		if (philo-> id % 2 == 0)
-			usleep(300 * 1000);
-		eat(philo, sim_start);
-		rest(philo, sim_start);
-		think(philo, sim_start);
-	}
+	if (philo-> id % 2 == 0)
+		usleep(300 * 1000);
+	while (eat(philo, sim_start)
+		&& rest(philo, sim_start)
+		&& think(philo, sim_start))
+		;
 	return (NULL);
 }
 
