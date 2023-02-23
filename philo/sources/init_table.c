@@ -6,7 +6,7 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 18:13:46 by edu               #+#    #+#             */
-/*   Updated: 2023/02/22 17:59:10 by etachott         ###   ########.fr       */
+/*   Updated: 2023/02/23 19:40:30 by etachott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static t_args	*init_args(char *argv[])
 	args->p_eat = ft_atoi(argv[3]);
 	args->p_sleep = ft_atoi(argv[4]);
 	args->p_eat_quantity = -1;
-	pthread_mutex_init(&args->meals_lock,NULL);
+	pthread_mutex_init(&args->meals_lock, NULL);
 	pthread_mutex_init(&args->state_lock, NULL);
 	if (argv[5])
 		args->p_eat_quantity = ft_atoi(argv[5]);
