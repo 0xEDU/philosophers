@@ -6,7 +6,7 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 11:58:31 by edu               #+#    #+#             */
-/*   Updated: 2023/02/22 17:42:04 by etachott         ###   ########.fr       */
+/*   Updated: 2023/02/27 18:32:34 by etachott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static void	free_locks(t_args *args)
 {
 	pthread_mutex_destroy(&args->state_lock);
 	pthread_mutex_destroy(&args->meals_lock);
+	pthread_mutex_destroy(&args->last_meal_lock);
+	pthread_mutex_destroy(&args->banquet_lock);
 }
 
 void	free_table(t_table *table)

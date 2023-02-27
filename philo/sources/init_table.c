@@ -6,7 +6,7 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 18:13:46 by edu               #+#    #+#             */
-/*   Updated: 2023/02/23 19:40:30 by etachott         ###   ########.fr       */
+/*   Updated: 2023/02/27 18:33:04 by etachott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ static t_args	*init_args(char *argv[])
 	args->p_sleep = ft_atoi(argv[4]);
 	args->p_eat_quantity = -1;
 	pthread_mutex_init(&args->meals_lock, NULL);
+	pthread_mutex_init(&args->last_meal_lock, NULL);
 	pthread_mutex_init(&args->state_lock, NULL);
+	pthread_mutex_init(&args->banquet_lock, NULL);
 	if (argv[5])
 		args->p_eat_quantity = ft_atoi(argv[5]);
 	return (args);
@@ -58,11 +60,9 @@ static t_philo	*init_philos(t_fork *forks, char *argv[])
 	philos = ft_calloc(sizeof(t_philo), quantity);
 	while (index < quantity)
 	{
-		philos[index].args = args;
-		philos[index].id = index + 1;
-		philos[index].left_fork = &forks[index];
-		philos[index].right_fork = &forks[(index + 1) % quantity];
+		philos[index].args = args; philos[index].id = index + 1; philos[index].left_fork = &forks[index]; philos[index].right_fork = &forks[(index + 1) % quantity];
 		philos[index].meals_done = 0;
+		philos[index].last_meal = 0;
 		index++;
 	}
 	return (philos);

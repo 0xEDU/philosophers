@@ -6,7 +6,7 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 23:02:34 by edu               #+#    #+#             */
-/*   Updated: 2023/02/27 17:15:41 by etachott         ###   ########.fr       */
+/*   Updated: 2023/02/27 18:32:16 by etachott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,11 @@ typedef struct s_args {
 	int		p_eat;
 	int		p_sleep;
 	int		p_eat_quantity;
+	int		banquet_ended;
 	t_fork	state_lock;
 	t_fork	meals_lock;
+	t_fork	last_meal_lock;
+	t_fork	banquet_lock;
 }				t_args;
 
 typedef struct s_philo {
@@ -40,6 +43,7 @@ typedef struct s_philo {
 	t_fork	*right_fork;
 	t_args	*args;
 	int		id;
+	long	last_meal;
 	int		meals_done;
 }				t_philo;
 
