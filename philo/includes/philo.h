@@ -6,7 +6,7 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 23:02:34 by edu               #+#    #+#             */
-/*   Updated: 2023/02/22 17:59:26 by etachott         ###   ########.fr       */
+/*   Updated: 2023/02/27 17:15:41 by etachott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void		loop_simulation(t_table *table);
 void		*simulation(void *arg);
 
 /* Utils functions */
+int			ate_enough(t_philo *philo);
 long int	ft_atoi(const char *str);
 void		*ft_calloc(size_t count, size_t size);
 int			ft_isdigit(int c);

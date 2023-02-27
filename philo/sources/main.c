@@ -6,7 +6,7 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 23:02:09 by edu               #+#    #+#             */
-/*   Updated: 2023/02/23 19:33:48 by etachott         ###   ########.fr       */
+/*   Updated: 2023/02/27 17:17:41 by etachott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ int	eat(t_philo *philo, time_t sim_start)
 	print_state(philo, EAT, sim_start);
 	if (philo->args->p_eat_quantity != -1)
 		increase_meals_done(philo);
+	usleep(philo->args->p_eat * 1000);
 	pthread_mutex_unlock(philo->right_fork);
 	pthread_mutex_unlock(philo->left_fork);
 	if (philo->meals_done == philo->args->p_eat_quantity)
 		return (0);
-	usleep(philo->args->p_eat * 1000);
 	return (1);
 }
 
@@ -61,10 +61,12 @@ void	*simulation(void *ptr)
 	philo = ptr;
 	if (philo-> id % 2 == 0)
 		usleep(300 * 1000);
-	while (eat(philo, sim_start)
-		&& rest(philo, sim_start)
-		&& think(philo, sim_start))
-		;
+	while (!ate_enough(philo))
+	{
+		eat(philo, sim_start);
+		rest(philo, sim_start);
+		think(philo, sim_start);
+	}
 	return (NULL);
 }
 
