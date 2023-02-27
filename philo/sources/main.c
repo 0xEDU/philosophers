@@ -6,7 +6,7 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 23:02:09 by edu               #+#    #+#             */
-/*   Updated: 2023/02/27 17:17:41 by etachott         ###   ########.fr       */
+/*   Updated: 2023/02/27 17:20:32 by etachott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ int	eat(t_philo *philo, time_t sim_start)
 	usleep(philo->args->p_eat * 1000);
 	pthread_mutex_unlock(philo->right_fork);
 	pthread_mutex_unlock(philo->left_fork);
-	if (philo->meals_done == philo->args->p_eat_quantity)
-		return (0);
 	return (1);
 }
 
@@ -64,6 +62,8 @@ void	*simulation(void *ptr)
 	while (!ate_enough(philo))
 	{
 		eat(philo, sim_start);
+		if (philo->meals_done == philo->args->p_eat_quantity)
+			break ;
 		rest(philo, sim_start);
 		think(philo, sim_start);
 	}
