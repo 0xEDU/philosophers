@@ -6,13 +6,14 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 21:34:06 by edu               #+#    #+#             */
-/*   Updated: 2023/02/28 09:26:47 by etachott         ###   ########.fr       */
+/*   Updated: 2023/02/28 19:07:44 by etachott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 #include <pthread.h>
 #include <unistd.h>
+
 
 static int	get_meals_done(t_philo *philo)
 {
@@ -72,8 +73,8 @@ void	*monitor(void *arg)
 		i = 0;
 		while (i < philos->args->p_quantity)
 		{
-			timenow = get_current_time();
-			if (timenow - get_last_meal(&philos[i]) >= philos->args->p_die)
+			timenow = get_elapsed_time(philos->sim_start);
+			if (timenow - get_last_meal(&philos[i]) > philos->args->p_die)
 			{
 				end_banquet(&philos[i]);
 				print_state(&philos[i], DIE, philos[i].sim_start);
@@ -81,7 +82,7 @@ void	*monitor(void *arg)
 			}
 			i++;
 		}
-		usleep(100 * 1000);
+		msleep(1);
 	}
 	return (NULL);
 }
@@ -94,7 +95,7 @@ void	loop_simulation(t_table *table)
 
 	threads = ft_calloc(sizeof(pthread_t), table->philos->args->p_quantity);
 	i = 0;
-	while (i < table->philos[0].args->p_quantity)
+	while (i < table->philos->args->p_quantity)
 	{
 		pthread_create(&threads[i], NULL, simulation, &table->philos[i]);
 		i++;

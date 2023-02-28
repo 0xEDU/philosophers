@@ -6,13 +6,22 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 23:02:09 by edu               #+#    #+#             */
-/*   Updated: 2023/02/28 09:26:13 by etachott         ###   ########.fr       */
+/*   Updated: 2023/02/28 19:04:30 by etachott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 #include <pthread.h>
 #include <unistd.h>
+
+void	msleep(int time)
+{
+	long	start_time;
+
+	start_time = get_current_time();
+	while ((get_current_time() - start_time) < (long)time)
+		usleep(10);
+}
 
 int	is_banquet_over(t_philo *philo)
 {
@@ -29,7 +38,7 @@ int	is_banquet_over(t_philo *philo)
 static void	set_last_meal(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->args->last_meal_lock);
-	philo->last_meal = get_current_time();
+	philo->last_meal = get_elapsed_time(philo->sim_start);
 	pthread_mutex_unlock(&philo->args->last_meal_lock);
 }
 
@@ -55,18 +64,18 @@ int	eat(t_philo *philo, time_t sim_start)
 	print_state(philo, TAKE_FORK, sim_start);
 	print_state(philo, EAT, sim_start);
 	set_last_meal(philo);
-	if (philo->args->p_eat_quantity != -1)
-		increase_meals_done(philo);
-	usleep(philo->args->p_eat * 1000);
+	msleep(philo->args->p_eat);
 	pthread_mutex_unlock(philo->right_fork);
 	pthread_mutex_unlock(philo->left_fork);
+	if (philo->args->p_eat_quantity != -1)
+		increase_meals_done(philo);
 	return (1);
 }
 
 int	rest(t_philo *philo, time_t sim_start)
 {
 	print_state(philo, SLEEP, sim_start);
-	usleep(philo->args->p_sleep * 1000);
+	msleep(philo->args->p_sleep);
 	return (1);
 }
 
@@ -77,18 +86,28 @@ int	think(t_philo *philo, time_t sim_start)
 	return (1);
 }
 
+static void *eat_alone(t_philo *philo, time_t sim_start)
+{
+	pthread_mutex_lock(philo->left_fork);
+	print_state(philo, TAKE_FORK, sim_start);
+	pthread_mutex_unlock(philo->left_fork);
+	return (NULL);
+}
+
 void	*simulation(void *ptr)
 {
 	t_philo			*philo;
 
 	philo = ptr;
-	if (philo-> id % 2 == 0)
-		usleep(300 * 1000);
+	if (philo->id % 2 == 0)
+		msleep(5);
+	if (philo->args->p_quantity == 1)
+		return (eat_alone(philo, philo->sim_start));
 	while (!is_banquet_over(philo))
 	{
 		eat(philo, philo->sim_start);
 		if (philo->meals_done == philo->args->p_eat_quantity)
-			break ;
+			return (NULL);
 		rest(philo, philo->sim_start);
 		think(philo, philo->sim_start);
 	}

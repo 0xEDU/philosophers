@@ -6,7 +6,7 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 23:02:34 by edu               #+#    #+#             */
-/*   Updated: 2023/02/28 09:23:23 by etachott         ###   ########.fr       */
+/*   Updated: 2023/02/28 19:07:29 by etachott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int			validate_argv(int argc, char *argv[]);
 void		free_table(t_table *table);
 
 /* Time-related functions */
+void		msleep(int time);
 time_t		get_current_time(void);
 time_t		get_elapsed_time(long int start);
 
