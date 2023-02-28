@@ -6,7 +6,7 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 18:13:46 by edu               #+#    #+#             */
-/*   Updated: 2023/02/27 18:33:04 by etachott         ###   ########.fr       */
+/*   Updated: 2023/02/28 09:25:39 by etachott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,20 @@ static t_philo	*init_philos(t_fork *forks, char *argv[])
 	t_philo	*philos;
 	t_args	*args;
 	int		index;
-	int		quantity;
+	long	sim_start;
 
 	index = 0;
-	quantity = ft_atoi(argv[1]);
+	sim_start = get_current_time();
 	args = init_args(argv);
-	philos = ft_calloc(sizeof(t_philo), quantity);
-	while (index < quantity)
+	philos = ft_calloc(sizeof(t_philo), ft_atoi(argv[1]));
+	while (index < ft_atoi(argv[1]))
 	{
-		philos[index].args = args; philos[index].id = index + 1; philos[index].left_fork = &forks[index]; philos[index].right_fork = &forks[(index + 1) % quantity];
+		philos[index].args = args; philos[index].id = index + 1;
+		philos[index].left_fork = &forks[index];
+		philos[index].right_fork = &forks[(index + 1) % ft_atoi(argv[1])];
 		philos[index].meals_done = 0;
 		philos[index].last_meal = 0;
+		philos[index].sim_start = sim_start;
 		index++;
 	}
 	return (philos);

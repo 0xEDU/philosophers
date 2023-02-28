@@ -6,7 +6,7 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 21:34:06 by edu               #+#    #+#             */
-/*   Updated: 2023/02/28 09:04:50 by etachott         ###   ########.fr       */
+/*   Updated: 2023/02/28 09:26:47 by etachott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ static void	end_banquet(t_philo *philo)
 
 void	*monitor(void *arg)
 {
-	const time_t	sim_start = get_current_time();
 	long			timenow;
 	t_philo			*philos;
 	int				i;
@@ -77,7 +76,7 @@ void	*monitor(void *arg)
 			if (timenow - get_last_meal(&philos[i]) >= philos->args->p_die)
 			{
 				end_banquet(&philos[i]);
-				print_state(&philos[i], DIE, sim_start);
+				print_state(&philos[i], DIE, philos[i].sim_start);
 				return (NULL);
 			}
 			i++;

@@ -6,7 +6,7 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 23:02:09 by edu               #+#    #+#             */
-/*   Updated: 2023/02/28 09:07:42 by etachott         ###   ########.fr       */
+/*   Updated: 2023/02/28 09:26:13 by etachott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ int	think(t_philo *philo, time_t sim_start)
 
 void	*simulation(void *ptr)
 {
-	const time_t	sim_start = get_current_time();
 	t_philo			*philo;
 
 	philo = ptr;
@@ -87,11 +86,11 @@ void	*simulation(void *ptr)
 		usleep(300 * 1000);
 	while (!is_banquet_over(philo))
 	{
-		eat(philo, sim_start);
+		eat(philo, philo->sim_start);
 		if (philo->meals_done == philo->args->p_eat_quantity)
 			break ;
-		rest(philo, sim_start);
-		think(philo, sim_start);
+		rest(philo, philo->sim_start);
+		think(philo, philo->sim_start);
 	}
 	return (NULL);
 }

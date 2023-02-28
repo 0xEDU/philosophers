@@ -6,7 +6,7 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 23:02:34 by edu               #+#    #+#             */
-/*   Updated: 2023/02/28 09:08:11 by etachott         ###   ########.fr       */
+/*   Updated: 2023/02/28 09:23:23 by etachott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_philo {
 	int		id;
 	long	last_meal;
 	int		meals_done;
+	long	sim_start;
 }				t_philo;
 
 typedef struct s_table {
