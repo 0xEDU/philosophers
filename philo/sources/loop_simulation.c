@@ -6,7 +6,7 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 21:34:06 by edu               #+#    #+#             */
-/*   Updated: 2023/02/27 18:33:00 by etachott         ###   ########.fr       */
+/*   Updated: 2023/02/28 09:04:50 by etachott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ static long	get_last_meal(t_philo *philo)
 
 static void	end_banquet(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->args->last_meal_lock);
+	pthread_mutex_lock(&philo->args->banquet_lock);
 	philo->args->banquet_ended = 1;
-	pthread_mutex_unlock(&philo->args->last_meal_lock);
+	pthread_mutex_unlock(&philo->args->banquet_lock);
 }
 
 void	*monitor(void *arg)

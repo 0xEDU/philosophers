@@ -6,13 +6,25 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 23:02:09 by edu               #+#    #+#             */
-/*   Updated: 2023/02/27 18:36:29 by etachott         ###   ########.fr       */
+/*   Updated: 2023/02/28 09:07:42 by etachott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 #include <pthread.h>
 #include <unistd.h>
+
+int	is_banquet_over(t_philo *philo)
+{
+	int	end;
+
+	pthread_mutex_lock(&philo->args->banquet_lock);
+	end = 0;
+	if (philo->args->banquet_ended)
+		end = 1;
+	pthread_mutex_unlock(&philo->args->banquet_lock);
+	return (end);
+}
 
 static void	set_last_meal(t_philo *philo)
 {
@@ -33,7 +45,7 @@ int	eat(t_philo *philo, time_t sim_start)
 		pthread_mutex_lock(philo->left_fork);
 		pthread_mutex_lock(philo->right_fork);
 	}
-	if (philo->args->banquet_ended)
+	if (is_banquet_over(philo))
 	{
 		pthread_mutex_unlock(philo->right_fork);
 		pthread_mutex_unlock(philo->left_fork);
@@ -63,18 +75,6 @@ int	think(t_philo *philo, time_t sim_start)
 	print_state(philo, THINK, sim_start);
 	usleep(500);
 	return (1);
-}
-
-static int	is_banquet_over(t_philo *philo)
-{
-	int	end;
-
-	pthread_mutex_lock(&philo->args->banquet_lock);
-	end = 0;
-	if (philo->args->banquet_ended)
-		end = 1;
-	pthread_mutex_unlock(&philo->args->banquet_lock);
-	return (end);
 }
 
 void	*simulation(void *ptr)

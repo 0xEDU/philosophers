@@ -6,7 +6,7 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 23:02:34 by edu               #+#    #+#             */
-/*   Updated: 2023/02/27 18:32:16 by etachott         ###   ########.fr       */
+/*   Updated: 2023/02/28 09:08:11 by etachott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void		loop_simulation(t_table *table);
 void		*simulation(void *arg);
 
 /* Utils functions */
+int			is_banquet_over(t_philo *philo);
 int			ate_enough(t_philo *philo);
 long int	ft_atoi(const char *str);
 void		*ft_calloc(size_t count, size_t size);
