@@ -6,7 +6,7 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 21:34:06 by edu               #+#    #+#             */
-/*   Updated: 2023/02/28 19:07:44 by etachott         ###   ########.fr       */
+/*   Updated: 2023/02/28 23:40:08 by edu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	are_philos_full(t_philo *philos)
 	i = 0;
 	while (i < philos->args->p_quantity)
 	{
-		if (get_meals_done(&philos[i]) == philos->args->p_quantity)
+		if (get_meals_done(&philos[i]) == philos->args->p_eat_quantity)
 			ate++;
 		i++;
 	}
@@ -82,7 +82,7 @@ void	*monitor(void *arg)
 			}
 			i++;
 		}
-		msleep(1);
+		//msleep(1);
 	}
 	return (NULL);
 }
