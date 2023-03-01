@@ -6,7 +6,7 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 18:13:46 by edu               #+#    #+#             */
-/*   Updated: 2023/02/28 09:25:39 by etachott         ###   ########.fr       */
+/*   Updated: 2023/03/01 15:22:12 by etachott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ static t_philo	*init_philos(t_fork *forks, char *argv[])
 	philos = ft_calloc(sizeof(t_philo), ft_atoi(argv[1]));
 	while (index < ft_atoi(argv[1]))
 	{
-		philos[index].args = args; philos[index].id = index + 1;
+		philos[index].args = args;
+		philos[index].id = index + 1;
 		philos[index].left_fork = &forks[index];
 		philos[index].right_fork = &forks[(index + 1) % ft_atoi(argv[1])];
 		philos[index].meals_done = 0;

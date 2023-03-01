@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lonely_philo.c                                     :+:      :+:    :+:   */
+/*   rest.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etachott <etachott@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/28 12:33:56 by etachott          #+#    #+#             */
-/*   Updated: 2023/02/28 13:17:19 by etachott         ###   ########.fr       */
+/*   Created: 2023/03/01 15:54:15 by etachott          #+#    #+#             */
+/*   Updated: 2023/03/01 16:00:05 by etachott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "philo.h"
 
-void	*lonely_banquet(void *arg)
+int	rest(t_philo *philo, time_t sim_start)
 {
-	return (NULL);
-}
-
-void	lonely_philo(long time_to_die)
-{
-	t_philo	*philo;
-	t_fork	*fork;
-	pthread_t	thread;
-
-	init_philo(philo);
-	pthread_create(&thread, NULL, lonely_banquet, philo);
-	pthread_join(thread, NULL);
-	free_philo(philo);
-	free_fork(fork);
+	print_state(philo, SLEEP, sim_start);
+	msleep(philo->args->p_sleep);
+	return (1);
 }

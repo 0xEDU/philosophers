@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ate_enough.c                                       :+:      :+:    :+:   */
+/*   is_banquet_over.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etachott <etachott@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/27 16:47:45 by etachott          #+#    #+#             */
-/*   Updated: 2023/03/01 15:21:52 by etachott         ###   ########.fr       */
+/*   Created: 2023/03/01 15:44:56 by etachott          #+#    #+#             */
+/*   Updated: 2023/03/01 15:59:55 by etachott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	ate_enough(t_philo *philo)
+int	is_banquet_over(t_philo *philo)
 {
-	int	is_fed;
+	int	end;
 
-	pthread_mutex_lock(&philo->args->meals_lock);
-	is_fed = 0;
-	if (philo->meals_done == philo->args->p_eat_quantity)
-		is_fed = 1;
-	pthread_mutex_unlock(&philo->args->meals_lock);
-	return (is_fed);
+	pthread_mutex_lock(&philo->args->banquet_lock);
+	end = 0;
+	if (philo->args->banquet_ended)
+		end = 1;
+	pthread_mutex_unlock(&philo->args->banquet_lock);
+	return (end);
 }

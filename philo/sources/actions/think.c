@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ate_enough.c                                       :+:      :+:    :+:   */
+/*   think.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etachott <etachott@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/27 16:47:45 by etachott          #+#    #+#             */
-/*   Updated: 2023/03/01 15:21:52 by etachott         ###   ########.fr       */
+/*   Created: 2023/03/01 15:54:44 by etachott          #+#    #+#             */
+/*   Updated: 2023/03/01 15:55:04 by etachott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	ate_enough(t_philo *philo)
+int	think(t_philo *philo, time_t sim_start)
 {
-	int	is_fed;
-
-	pthread_mutex_lock(&philo->args->meals_lock);
-	is_fed = 0;
-	if (philo->meals_done == philo->args->p_eat_quantity)
-		is_fed = 1;
-	pthread_mutex_unlock(&philo->args->meals_lock);
-	return (is_fed);
+	print_state(philo, THINK, sim_start);
+	usleep(500);
+	return (1);
 }

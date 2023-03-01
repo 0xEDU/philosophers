@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ate_enough.c                                       :+:      :+:    :+:   */
+/*   msleep.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etachott <etachott@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/27 16:47:45 by etachott          #+#    #+#             */
-/*   Updated: 2023/03/01 15:21:52 by etachott         ###   ########.fr       */
+/*   Created: 2023/03/01 15:43:35 by etachott          #+#    #+#             */
+/*   Updated: 2023/03/01 15:43:52 by etachott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	ate_enough(t_philo *philo)
+void	msleep(int time)
 {
-	int	is_fed;
+	long	start_time;
 
-	pthread_mutex_lock(&philo->args->meals_lock);
-	is_fed = 0;
-	if (philo->meals_done == philo->args->p_eat_quantity)
-		is_fed = 1;
-	pthread_mutex_unlock(&philo->args->meals_lock);
-	return (is_fed);
+	start_time = get_current_time();
+	while ((get_current_time() - start_time) < (long)time)
+		usleep(10);
 }
