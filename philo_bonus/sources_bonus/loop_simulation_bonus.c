@@ -3,35 +3,59 @@
 /*                                                        :::      ::::::::   */
 /*   loop_simulation_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
+/*   By: etachott < etachott@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 21:34:06 by edu               #+#    #+#             */
-/*   Updated: 2023/03/02 15:57:35 by etachott         ###   ########.fr       */
+/*   Updated: 2023/03/02 19:29:54 by etachott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
+static void	start_process(pid_t *pid, t_philo *philo)
+{
+	int	exit_status;
+
+	*pid = fork();
+	if (*pid == 0)
+	{
+		exit_status = simulation(philo);
+		finish_philo(philo->philos, exit_status);
+	}
+}
+
+static void	join_process(t_philo *philos)
+{
+	int	index;
+	int	exit_status;
+
+	index = 0;
+	exit_status = 0;
+	while (index < philos->args->p_quantity && exit_status == 0)
+	{
+		waitpid(-1, &exit_status, 0);
+		if (WIFEXITED(exit_status))
+			exit_status = WEXITSTATUS(exit_status);
+		index++;
+	}
+	if (exit_status)
+	{
+		index = 0;
+		while (index < philos->args->p_quantity)
+		{
+			kill(philos[index].pid, SIGKILL);
+			index++;
+		}
+	}
+	return (exit_status);
+}
+
 void	loop_simulation(t_table *table)
 {
-	pthread_t	*threads;
-	pthread_t	monitor_thread;
 	int			i;
 
-	threads = ft_calloc(sizeof(pthread_t), table->philos->args->p_quantity);
-	i = 0;
-	while (i < table->philos->args->p_quantity)
-	{
-		pthread_create(&threads[i], NULL, simulation, &table->philos[i]);
-		i++;
-	}
-	i = 0;
-	pthread_create(&monitor_thread, NULL, monitor, table->philos);
-	while (i < table->philos->args->p_quantity)
-	{
-		pthread_join(threads[i], NULL);
-		i++;
-	}
-	pthread_join(monitor_thread, NULL);
-	free(threads);
+	i = -1;
+	while (++i < table->philos->args->p_quantity)
+		start_process(&table->philos[i].pid, &table->philos[i]);
+	join_process(&table->philos[i]);
 }
