@@ -6,7 +6,7 @@
 /*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 23:02:34 by edu               #+#    #+#             */
-/*   Updated: 2023/03/01 15:55:49 by etachott         ###   ########.fr       */
+/*   Updated: 2023/03/02 16:05:18 by etachott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ typedef struct s_philo {
 }				t_philo;
 
 typedef struct s_table {
-	int		current_philo;
 	t_philo	*philos;
 	t_fork	*forks;
 }				t_table;
