@@ -6,11 +6,12 @@
 /*   By: etachott < etachott@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 23:02:34 by edu               #+#    #+#             */
-/*   Updated: 2023/03/02 19:39:43 by etachott         ###   ########.fr       */
+/*   Updated: 2023/03/02 20:40:59 by etachott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
+#ifndef PHILO_BONUS_H
+# define PHILO_BONUS_H
 # include <stdio.h>
 # include <semaphore.h>
 # include <fcntl.h>
@@ -59,19 +60,18 @@ typedef struct s_table {
 	t_fork	*forks;
 }				t_table;
 
-typedef struct timeval	t_timeval;
-
 /* Structural functions */
 t_table		*init_table(char *argv[]);
-int			validate_argv(int argc, char *argv[]);
 void		free_table(t_table *table);
+int			validate_argv(int argc, char *argv[]);
 
 /* Actions functions */
-int			eat(t_philo *philo, time_t sim_start);
-int			rest(t_philo *philo, time_t sim_start);
-int			think(t_philo *philo, time_t sim_start);
+void		eat(t_philo *philo, time_t sim_start);
+void		rest(t_philo *philo, time_t sim_start);
+void		think(t_philo *philo, time_t sim_start);
 
 /* Time-related functions */
+void		am_i_dead_yet(t_philo *philo, int ms_time);
 void		msleep(int time);
 time_t		get_current_time(void);
 time_t		get_elapsed_time(long int start);

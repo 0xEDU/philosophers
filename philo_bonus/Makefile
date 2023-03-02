@@ -6,11 +6,9 @@ PATH_ACTIONS_SRCS = ./sources_bonus/actions_bonus/
 PATH_OBJS = ./objects/
 
 SRCS = main_bonus.c \
-	   ate_enough_bonus.c \
 	   free_table_bonus.c \
 	   init_table_bonus.c \
 	   loop_simulation_bonus.c \
-	   monitor_bonus.c \
 	   simulation_bonus.c \
 	   validate_argv_bonus.c 
 
@@ -18,16 +16,15 @@ ACTIONS_SRCS = eat_bonus.c \
 			   rest_bonus.c \
 			   think_bonus.c
 
-TIME_SRCS = get_current_time_bonus.c \
+TIME_SRCS = am_i_dead_yet_bonus.c \
+			get_current_time_bonus.c \
 			get_elapsed_time_bonus.c \
-			msleep_bonus.c
+			msleep_bonus.c 
 
-UTILS = are_philos_full_bonus.c \
-		ft_atoi_bonus.c \
+UTILS = ft_atoi_bonus.c \
 		ft_calloc_bonus.c \
 		ft_isdigit_bonus.c \
-		increase_meals_done_bonus.c \
-		is_banquet_over_bonus.c \
+		finish_philo_bonus.c \
 		print_state_bonus.c
 
 OBJS = ${SRCS:%.c=$(PATH_OBJS)%.o}

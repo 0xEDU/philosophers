@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_state_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
+/*   By: etachott < etachott@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 22:59:19 by edu               #+#    #+#             */
-/*   Updated: 2023/03/02 16:00:10 by etachott         ###   ########.fr       */
+/*   Updated: 2023/03/02 20:37:15 by etachott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,9 @@ void	print_state(t_philo *philo, char *state, time_t sim_start)
 {
 	const char	*str = "Philosopher";
 
-	pthread_mutex_lock(&philo->args->state_lock);
-	if (is_banquet_over(philo) && ft_strncmp(state, DIE, 5))
-	{
-		pthread_mutex_unlock(&philo->args->state_lock);
-		return ;
-	}
+	sem_wait(philo->args->state_lock);
 	printf("%ld %s %d %s\n",
 		get_elapsed_time(sim_start), str, philo->id, state);
-	pthread_mutex_unlock(&philo->args->state_lock);
+	if (ft_strncmp(state, DIE, 5))
+		sem_post(philo->args->state_lock);
 }

@@ -6,7 +6,7 @@
 /*   By: etachott < etachott@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 18:13:46 by edu               #+#    #+#             */
-/*   Updated: 2023/03/02 17:44:26 by etachott         ###   ########.fr       */
+/*   Updated: 2023/03/02 19:53:29 by etachott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ static t_philo	*init_philos(t_fork **forks, char *argv[])
 	{
 		philos[index].args = args;
 		philos[index].id = index + 1;
-		philos[index].meals_done = 0;
-		philos[index].last_meal = 0;
 		philos[index].sim_start = sim_start;
 		philos[index].left_fork = *forks;
 		philos[index].right_fork = *forks;

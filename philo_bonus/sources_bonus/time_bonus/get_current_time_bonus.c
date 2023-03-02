@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_current_time_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
+/*   By: etachott < etachott@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 12:22:02 by edu               #+#    #+#             */
-/*   Updated: 2023/03/02 15:58:52 by etachott         ###   ########.fr       */
+/*   Updated: 2023/03/02 20:41:08 by etachott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 time_t	get_current_time(void)
 {
-	t_timeval	timeval;
+	struct timeval	timev;
 
-	gettimeofday(&timeval, NULL);
-	return ((timeval.tv_sec * 1000) + (timeval.tv_usec / 1000));
+	gettimeofday(&timev, NULL);
+	return ((timev.tv_sec * 1000) + (timev.tv_usec / 1000));
 }
