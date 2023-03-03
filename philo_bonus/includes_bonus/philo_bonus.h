@@ -6,7 +6,7 @@
 /*   By: etachott < etachott@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 23:02:34 by edu               #+#    #+#             */
-/*   Updated: 2023/03/02 20:40:59 by etachott         ###   ########.fr       */
+/*   Updated: 2023/03/02 21:21:30 by etachott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
-# define TAKE_FORK "has taken a fork."
-# define EAT "is eating."
-# define SLEEP "is sleeping."
-# define THINK "is thinking."
-# define DIE "died."
+# define TAKE_FORK "has taken a fork. 🍴"
+# define EAT "is eating. 😋"
+# define SLEEP "is sleeping. 😴"
+# define THINK "is thinking. 🤔"
+# define DIE "died. 🪦"
 # define STATE_LOCK "/state_lock"
 # define FORKS "/forks"
 

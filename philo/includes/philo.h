@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edu <marvin@42.fr>                         +#+  +:+       +#+        */
+/*   By: etachott < etachott@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 23:02:34 by edu               #+#    #+#             */
-/*   Updated: 2023/03/02 16:05:18 by etachott         ###   ########.fr       */
+/*   Updated: 2023/03/02 21:21:57 by etachott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 # include <sys/time.h>
 # include <unistd.h>
 
-# define TAKE_FORK "has taken a fork."
-# define EAT "is eating."
-# define SLEEP "is sleeping."
-# define THINK "is thinking."
-# define DIE "died."
+# define TAKE_FORK "has taken a fork. 🍴"
+# define EAT "is eating. 😋"
+# define SLEEP "is sleeping. 😴"
+# define THINK "is thinking. 🤔"
+# define DIE "died. 🪦"
 
 typedef pthread_mutex_t	t_fork;
 
